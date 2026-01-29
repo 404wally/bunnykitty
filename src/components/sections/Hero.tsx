@@ -6,11 +6,7 @@ import Image from 'next/image';
 export function Hero() {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center bg-pop-yellow overflow-hidden"
-      style={{
-        // Match Concept 1 exactly: padding: 8rem 2rem 4rem
-        padding: '8rem 2rem 4rem',
-      }}
+      className="relative min-h-screen flex items-center justify-center bg-pop-yellow overflow-hidden px-4 sm:px-8 pt-24 pb-8 sm:pt-32 sm:pb-16"
     >
       {/* Animated Background Pattern */}
       <div
@@ -25,24 +21,24 @@ export function Hero() {
         }}
       />
 
-      {/* Floating TWURP Characters - positioned exactly like Concept 1 */}
-      <FloatingCharacter position="top-[20%] left-[10%]" delay={0} />
-      <FloatingCharacter position="top-[30%] right-[10%]" delay={0.5} />
-      <FloatingCharacter position="bottom-[20%] left-[15%]" delay={1} />
-      <FloatingCharacter position="bottom-[30%] right-[15%]" delay={1.5} />
+      {/* Floating TWURP Characters - hidden on mobile, visible on tablet+ */}
+      <FloatingCharacter position="top-[20%] left-[5%] sm:left-[10%]" delay={0} className="hidden sm:block" />
+      <FloatingCharacter position="top-[30%] right-[5%] sm:right-[10%]" delay={0.5} className="hidden sm:block" />
+      <FloatingCharacter position="bottom-[25%] left-[5%] sm:left-[15%]" delay={1} className="hidden md:block" />
+      <FloatingCharacter position="bottom-[30%] right-[5%] sm:right-[15%]" delay={1.5} className="hidden md:block" />
 
       {/* Hero Content */}
       <div className="relative z-10 text-center max-w-[900px]">
-        {/* Hero Badge - margin-bottom: 2rem like Concept 1 */}
+        {/* Hero Badge - responsive sizing */}
         <motion.span
           className="
             inline-block
-            px-6 py-2
+            px-4 py-1.5 sm:px-6 sm:py-2
             bg-pop-pink
-            border-3 border-black
-            font-extrabold uppercase text-sm
-            shadow-[4px_4px_0_#1A1A1A]
-            mb-8
+            border-2 sm:border-3 border-black
+            font-extrabold uppercase text-xs sm:text-sm
+            shadow-[3px_3px_0_#1A1A1A] sm:shadow-[4px_4px_0_#1A1A1A]
+            mb-4 sm:mb-8
           "
           animate={{ rotate: [-2, 2, -2] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
@@ -50,9 +46,9 @@ export function Hero() {
           ✨ Welcome to the Universe ✨
         </motion.span>
 
-        {/* Main Headline - margin-bottom: 2rem like Concept 1 */}
+        {/* Main Headline - responsive margins */}
         <motion.h1
-          className="font-display leading-[0.9] uppercase mb-8"
+          className="font-display leading-[0.85] sm:leading-[0.9] uppercase mb-4 sm:mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -77,9 +73,9 @@ export function Hero() {
           </span>
         </motion.h1>
 
-        {/* Description - Concept 1: font-size: 1.5rem, margin: 0 auto 3rem */}
+        {/* Description - responsive text sizing */}
         <motion.p
-          className="text-2xl font-semibold max-w-[600px] mx-auto mb-12 leading-relaxed"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold max-w-[600px] mx-auto mb-6 sm:mb-10 md:mb-12 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -87,9 +83,9 @@ export function Hero() {
           Enter a world where art comes alive! Collectible characters, limited editions, and pure creative joy.
         </motion.p>
 
-        {/* CTA Buttons - Concept 1: padding: 1.25rem 2.5rem, font-size: 1.1rem */}
+        {/* CTA Buttons - responsive sizing */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center flex-wrap"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -98,11 +94,11 @@ export function Hero() {
             href="/shop"
             className="
               inline-flex items-center justify-center gap-2
-              px-10 py-5
+              px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5
               bg-pop-red text-white
-              font-extrabold text-lg uppercase
-              border-4 border-black
-              shadow-[6px_6px_0_#1A1A1A]
+              font-extrabold text-sm sm:text-base md:text-lg uppercase
+              border-3 sm:border-4 border-black
+              shadow-[4px_4px_0_#1A1A1A] sm:shadow-[6px_6px_0_#1A1A1A]
             "
             whileHover={{
               x: -3,
@@ -117,11 +113,11 @@ export function Hero() {
             href="/story"
             className="
               inline-flex items-center justify-center gap-2
-              px-10 py-5
+              px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5
               bg-white text-black
-              font-extrabold text-lg uppercase
-              border-4 border-black
-              shadow-[6px_6px_0_#1A1A1A]
+              font-extrabold text-sm sm:text-base md:text-lg uppercase
+              border-3 sm:border-4 border-black
+              shadow-[4px_4px_0_#1A1A1A] sm:shadow-[6px_6px_0_#1A1A1A]
               hover:bg-pop-green
             "
             whileHover={{
@@ -140,10 +136,10 @@ export function Hero() {
 }
 
 // Floating TWURP Character Component - sized to match Concept 1 (font-size: 4rem = ~64px)
-function FloatingCharacter({ position, delay }: { position: string; delay: number }) {
+function FloatingCharacter({ position, delay, className = '' }: { position: string; delay: number; className?: string }) {
   return (
     <motion.div
-      className={`absolute ${position} w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 z-10 cursor-grab`}
+      className={`absolute ${position} w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 z-10 cursor-grab ${className}`}
       animate={{
         y: [0, -20, 0],
         rotate: [0, 10, 0],

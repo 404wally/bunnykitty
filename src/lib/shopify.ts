@@ -241,7 +241,7 @@ export function getShopifyCartUrl(): string {
   return `https://${domain}/cart`;
 }
 
-// Mock products for development/demo
+// Mock products for development/demo - using placeholder images
 export function getMockProducts(): Product[] {
   const mockProducts: Product[] = [
     {
@@ -252,8 +252,8 @@ export function getMockProducts(): Product[] {
       price: 35.00,
       currencyCode: 'USD',
       images: [
-        { url: '/images/products/tee-1.jpg', altText: 'BunnyKitty Classic Tee' },
-        { url: '/images/products/tee-1-alt.jpg', altText: 'BunnyKitty Classic Tee Back' },
+        { url: 'https://picsum.photos/seed/bktee/600/800', altText: 'BunnyKitty Classic Tee' },
+        { url: 'https://picsum.photos/seed/bktee2/600/800', altText: 'BunnyKitty Classic Tee Back' },
       ],
       prominence: 'hero',
       availableForSale: true,
@@ -270,7 +270,7 @@ export function getMockProducts(): Product[] {
       compareAtPrice: 75.00,
       currencyCode: 'USD',
       images: [
-        { url: '/images/products/hoodie-1.jpg', altText: 'City Nights Hoodie' },
+        { url: 'https://picsum.photos/seed/bkhoodie/600/800', altText: 'City Nights Hoodie' },
       ],
       prominence: 'featured',
       availableForSale: true,
@@ -286,7 +286,7 @@ export function getMockProducts(): Product[] {
       price: 45.00,
       currencyCode: 'USD',
       images: [
-        { url: '/images/products/print-1.jpg', altText: 'Neon Dreams Print' },
+        { url: 'https://picsum.photos/seed/bkprint/600/800', altText: 'Neon Dreams Print' },
       ],
       prominence: 'featured',
       availableForSale: true,
@@ -302,7 +302,7 @@ export function getMockProducts(): Product[] {
       price: 12.00,
       currencyCode: 'USD',
       images: [
-        { url: '/images/products/pin-1.jpg', altText: 'BunnyKitty Enamel Pin' },
+        { url: 'https://picsum.photos/seed/bkpin/600/600', altText: 'BunnyKitty Enamel Pin' },
       ],
       prominence: 'compact',
       availableForSale: true,
@@ -318,7 +318,7 @@ export function getMockProducts(): Product[] {
       price: 15.00,
       currencyCode: 'USD',
       images: [
-        { url: '/images/products/stickers-1.jpg', altText: 'Sticker Pack Vol. 1' },
+        { url: 'https://picsum.photos/seed/bkstickers/600/600', altText: 'Sticker Pack Vol. 1' },
       ],
       prominence: 'standard',
       availableForSale: true,
@@ -334,7 +334,7 @@ export function getMockProducts(): Product[] {
       price: 28.00,
       currencyCode: 'USD',
       images: [
-        { url: '/images/products/tote-1.jpg', altText: 'Canvas Tote Bag' },
+        { url: 'https://picsum.photos/seed/bktote/600/600', altText: 'Canvas Tote Bag' },
       ],
       prominence: 'standard',
       availableForSale: true,
@@ -350,7 +350,7 @@ export function getMockProducts(): Product[] {
       price: 75.00,
       currencyCode: 'USD',
       images: [
-        { url: '/images/products/deck-1.jpg', altText: 'Street Series Skate Deck' },
+        { url: 'https://picsum.photos/seed/bkdeck/600/800', altText: 'Street Series Skate Deck' },
       ],
       prominence: 'standard',
       availableForSale: true,
@@ -366,7 +366,7 @@ export function getMockProducts(): Product[] {
       price: 25.00,
       currencyCode: 'USD',
       images: [
-        { url: '/images/products/case-1.jpg', altText: 'BunnyKitty Phone Case' },
+        { url: 'https://picsum.photos/seed/bkcase/600/600', altText: 'BunnyKitty Phone Case' },
       ],
       prominence: 'compact',
       availableForSale: true,

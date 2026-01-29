@@ -42,11 +42,11 @@ export function StoryCards() {
       {/* Rainbow Stripe at Top - matches Concept 1 ::before element */}
       <RainbowStripe className="absolute top-0 left-0 right-0 z-10" />
 
-      {/* Padding matches Concept 1: padding: 6rem 2rem */}
-      <div className="py-24 px-8">
+      {/* Responsive padding */}
+      <div className="pt-10 pb-12 px-4 sm:pt-16 sm:pb-20 sm:px-6 md:py-24 md:px-8">
         <div className="max-w-[1400px] mx-auto">
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {/* Cards Grid - responsive */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {storyCards.map((card, index) => (
               <motion.div
                 key={card.title}
