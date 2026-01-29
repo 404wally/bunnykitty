@@ -2,10 +2,10 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 const AUTH_COOKIE_NAME = 'bunnykitty-auth';
-const SITE_PASSWORD = 'REALLYrilla2026'; // Hardcoded for now
 
 export function middleware(request: NextRequest) {
-  const sitePassword = SITE_PASSWORD;
+  // Use env var with fallback to hardcoded value
+  const sitePassword = process.env.SITE_PASSWORD || 'REALLYrilla2026';
 
   // Skip password protection if no password is set
   if (!sitePassword) {
