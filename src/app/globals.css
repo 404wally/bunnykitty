@@ -54,16 +54,24 @@ body {
   cursor: url('/star_cursor.png') 16 16, auto;
 }
 
-/* Custom pointer cursor for clickable elements */
-a,
-button,
-[role="button"],
-input[type="submit"],
-input[type="button"],
-.cursor-pointer,
-[onclick],
-select,
-label[for] {
+/* Custom pointer cursor for clickable elements - high specificity to override Tailwind */
+html body a,
+html body button,
+html body [role="button"],
+html body input[type="submit"],
+html body input[type="button"],
+html body .cursor-pointer,
+html body [onclick],
+html body select,
+html body label[for],
+html body a:hover,
+html body button:hover,
+html body [role="button"]:hover {
+  cursor: url('/sparkle_pointer.png') 12 12, pointer !important;
+}
+
+/* Also catch any element with cursor-pointer class from Tailwind */
+*[class*="cursor-pointer"] {
   cursor: url('/sparkle_pointer.png') 12 12, pointer !important;
 }
 
@@ -247,4 +255,13 @@ label[for] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ============================================
+   CUSTOM CURSORS - MUST BE AT END OF FILE
+   ============================================ */
+
+/* Sparkle pointer for ALL clickable elements (highest specificity) */
+:where(a, button, [role="button"], input[type="submit"], input[type="button"], select, label[for], [onclick]) {
+  cursor: url('/sparkle_pointer.png') 12 12, pointer !important;
 }
