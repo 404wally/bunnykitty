@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -97,29 +97,81 @@ function AnimatedLogo() {
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isAtTop, setIsAtTop] = useState(true);
+  const lastScrollY = useRef(0);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // At top of page - always show
+      if (currentScrollY < 50) {
+        setIsVisible(true);
+        setIsAtTop(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      setIsAtTop(false);
+
+      // Scrolling down - hide header
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsVisible(false);
+      }
+      // Scrolling up - show header
+      else if (currentScrollY < lastScrollY.current) {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      // Show header when mouse is near top of screen (within 60px)
+      if (e.clientY < 60 && !isAtTop) {
+        setIsVisible(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isAtTop]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[1000] bg-white border-b-4 border-black shadow-[0_4px_0_#1A1A1A]">
+    <motion.header
+      ref={headerRef}
+      className="fixed top-0 left-0 right-0 z-[1000] bg-white border-b-4 border-black shadow-[0_4px_0_#1A1A1A]"
+      initial={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : -100 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+    >
       <div className="px-4 sm:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Animated Rainbow Logo with hover color cycling */}
           <AnimatedLogo />
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-1.5">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`
-                  px-4 lg:px-6 py-2 lg:py-3
+                  px-3 lg:px-4 py-1.5 lg:py-2
                   bg-white
-                  font-extrabold text-black text-sm uppercase
-                  border-3 border-black
-                  shadow-[4px_4px_0_#1A1A1A]
+                  font-extrabold text-black text-xs uppercase
+                  border-2 border-black
+                  shadow-[3px_3px_0_#1A1A1A]
                   transition-all duration-200
                   hover:-translate-x-0.5 hover:-translate-y-0.5
-                  hover:shadow-[6px_6px_0_#1A1A1A]
+                  hover:shadow-[4px_4px_0_#1A1A1A]
                   ${link.hoverColor}
                 `}
               >
@@ -130,14 +182,14 @@ export function Header() {
             <Link
               href="/cart"
               className="
-                px-4 lg:px-6 py-2 lg:py-3
+                px-3 lg:px-4 py-1.5 lg:py-2
                 bg-pop-red text-white
-                font-extrabold text-sm uppercase
-                border-3 border-black
-                shadow-[4px_4px_0_#1A1A1A]
+                font-extrabold text-xs uppercase
+                border-2 border-black
+                shadow-[3px_3px_0_#1A1A1A]
                 transition-all duration-200
                 hover:-translate-x-0.5 hover:-translate-y-0.5
-                hover:shadow-[6px_6px_0_#1A1A1A]
+                hover:shadow-[4px_4px_0_#1A1A1A]
                 hover:bg-pop-pink
               "
             >
@@ -150,35 +202,35 @@ export function Header() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="
               md:hidden
-              w-12 h-12
+              w-10 h-10
               bg-pop-red text-white
-              border-3 border-black
+              border-2 border-black
               flex items-center justify-center
-              shadow-[4px_4px_0_#1A1A1A]
+              shadow-[3px_3px_0_#1A1A1A]
             "
           >
             <motion.div
               animate={isMobileMenuOpen ? 'open' : 'closed'}
-              className="flex flex-col gap-1.5"
+              className="flex flex-col gap-1"
             >
               <motion.span
-                className="w-6 h-0.5 bg-white block"
+                className="w-5 h-0.5 bg-white block"
                 variants={{
-                  open: { rotate: 45, y: 6 },
+                  open: { rotate: 45, y: 5 },
                   closed: { rotate: 0, y: 0 },
                 }}
               />
               <motion.span
-                className="w-6 h-0.5 bg-white block"
+                className="w-5 h-0.5 bg-white block"
                 variants={{
                   open: { opacity: 0 },
                   closed: { opacity: 1 },
                 }}
               />
               <motion.span
-                className="w-6 h-0.5 bg-white block"
+                className="w-5 h-0.5 bg-white block"
                 variants={{
-                  open: { rotate: -45, y: -6 },
+                  open: { rotate: -45, y: -5 },
                   closed: { rotate: 0, y: 0 },
                 }}
               />
@@ -243,6 +295,6 @@ export function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

@@ -40,8 +40,8 @@ export function BentoGrid({ products, isLoading = false, className = '' }: Bento
     return (
       <div
         className={`
-          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
-          gap-4 md:gap-6
+          grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4
+          gap-3 md:gap-4
           ${className}
         `}
       >
@@ -83,8 +83,8 @@ export function BentoGrid({ products, isLoading = false, className = '' }: Bento
   return (
     <motion.div
       className={`
-        grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
-        gap-4 md:gap-6
+        grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4
+        gap-3 md:gap-4
         auto-rows-auto
         ${className}
       `}
@@ -121,10 +121,10 @@ export function BentoGridSection({
   viewAllLink,
 }: BentoGridSectionProps) {
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-8 md:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div className="mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
             <motion.h2
               className="font-display text-4xl md:text-5xl lg:text-6xl text-black"

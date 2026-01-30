@@ -14,35 +14,41 @@ interface ProductCardProps {
 }
 
 // Size configurations based on prominence
+// UPDATED: Much larger image ratios, compact info sections
 const sizeConfig: Record<ProminenceLevel, {
   cardClass: string;
   imageHeight: string;
   titleSize: string;
   showDescription: boolean;
+  padding: string;
 }> = {
   hero: {
     cardClass: 'col-span-2 row-span-2',
-    imageHeight: 'h-80 md:h-[400px]',
-    titleSize: 'text-2xl md:text-3xl',
-    showDescription: true,
+    imageHeight: 'h-[320px] md:h-[450px]', // Increased from 400px
+    titleSize: 'text-lg md:text-xl',
+    showDescription: false, // Removed description
+    padding: 'p-3',
   },
   featured: {
     cardClass: 'col-span-2 row-span-1',
-    imageHeight: 'h-48 md:h-64',
-    titleSize: 'text-xl md:text-2xl',
-    showDescription: true,
+    imageHeight: 'h-48 md:h-72', // Increased
+    titleSize: 'text-base md:text-lg',
+    showDescription: false,
+    padding: 'p-2.5',
   },
   standard: {
     cardClass: 'col-span-1 row-span-1',
-    imageHeight: 'h-48 md:h-56',
-    titleSize: 'text-lg',
+    imageHeight: 'h-52 md:h-64', // Increased from h-56
+    titleSize: 'text-sm md:text-base',
     showDescription: false,
+    padding: 'p-2',
   },
   compact: {
     cardClass: 'col-span-1 row-span-1',
-    imageHeight: 'h-40 md:h-48',
-    titleSize: 'text-base',
+    imageHeight: 'h-44 md:h-56', // Increased from h-48
+    titleSize: 'text-sm',
     showDescription: false,
+    padding: 'p-2',
   },
 };
 
@@ -77,28 +83,28 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       className={`${config.cardClass} relative group`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.4 }}
+      transition={{ delay: index * 0.05, duration: 0.3 }}
     >
       <Link href={productUrl}>
         <motion.article
           className="
             h-full
             bg-white
-            border-4 border-black
-            shadow-[6px_6px_0px_#1A1A1A]
+            border-3 border-black
+            shadow-[4px_4px_0px_#1A1A1A]
             overflow-hidden
             cursor-pointer
           "
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           whileHover={{
-            y: -8,
-            boxShadow: '12px 12px 0px #1A1A1A',
+            y: -6,
+            boxShadow: '8px 8px 0px #1A1A1A',
           }}
           transition={{ duration: 0.2 }}
         >
-          {/* Image Container */}
-          <div className={`relative ${config.imageHeight} overflow-hidden bg-pop-yellow/20`}>
+          {/* Image Container - Takes up most of the card */}
+          <div className={`relative ${config.imageHeight} overflow-hidden bg-gray-100`}>
             {/* Badges */}
             {isOnSale && (
               <RibbonBadge variant="red">SALE</RibbonBadge>
@@ -141,16 +147,16 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
               className="
                 absolute inset-0
                 bg-gradient-to-t from-black/60 to-transparent
-                flex items-end justify-center pb-4
+                flex items-end justify-center pb-3
               "
               initial={{ opacity: 0 }}
               animate={{ opacity: isHovered ? 1 : 0 }}
               transition={{ duration: 0.2 }}
             >
               <span className="
-                px-4 py-2
+                px-3 py-1.5
                 bg-pop-green text-black
-                font-bold uppercase
+                font-bold text-xs uppercase
                 border-2 border-black
               ">
                 View Product
@@ -158,51 +164,36 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             </motion.div>
           </div>
 
-          {/* Content */}
-          <div className="p-4 border-t-4 border-black">
-            {/* Product Type Tag */}
-            {product.productType && (
-              <Badge variant="blue" className="mb-2">
-                {product.productType}
-              </Badge>
-            )}
+          {/* Content - COMPACT: Just badge + title + price inline */}
+          <div className={`${config.padding} border-t-3 border-black`}>
+            {/* Row 1: Badge + Title */}
+            <div className="flex items-start gap-2 mb-1">
+              {product.productType && (
+                <Badge variant="blue" className="shrink-0 text-[10px] px-1.5 py-0.5">
+                  {product.productType}
+                </Badge>
+              )}
+              <h3 className={`font-bold text-black ${config.titleSize} leading-tight line-clamp-1 flex-1`}>
+                {product.title}
+              </h3>
+            </div>
 
-            {/* Title */}
-            <h3 className={`font-bold text-black ${config.titleSize} mb-2 line-clamp-2`}>
-              {product.title}
-            </h3>
-
-            {/* Description (for larger cards) */}
-            {config.showDescription && product.description && (
-              <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-                {product.description}
-              </p>
-            )}
-
-            {/* Price */}
-            <div className="flex items-center gap-3">
-              <span className="font-display text-xl text-pop-red">
+            {/* Row 2: Price */}
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-base text-pop-red">
                 ${product.price.toFixed(2)}
               </span>
               {isOnSale && product.compareAtPrice && (
-                <span className="text-gray-400 line-through text-sm">
+                <span className="text-gray-400 line-through text-xs">
                   ${product.compareAtPrice.toFixed(2)}
                 </span>
               )}
+              {!product.availableForSale && (
+                <span className="text-[10px] font-bold uppercase text-gray-500 bg-gray-200 px-1.5 py-0.5">
+                  Sold Out
+                </span>
+              )}
             </div>
-
-            {/* Availability */}
-            {!product.availableForSale && (
-              <span className="
-                inline-block mt-2
-                px-2 py-1
-                bg-gray-200 text-gray-600
-                text-xs font-bold uppercase
-                border-2 border-gray-400
-              ">
-                Sold Out
-              </span>
-            )}
           </div>
         </motion.article>
       </Link>
@@ -219,16 +210,18 @@ export function ProductCardSkeleton({ prominence = 'standard' }: { prominence?: 
       <div className="
         h-full
         bg-white
-        border-4 border-black
-        shadow-[6px_6px_0px_#1A1A1A]
+        border-3 border-black
+        shadow-[4px_4px_0px_#1A1A1A]
         overflow-hidden
         animate-pulse
       ">
         <div className={`${config.imageHeight} bg-gray-200`} />
-        <div className="p-4 border-t-4 border-black space-y-3">
+        <div className={`${config.padding} border-t-3 border-black space-y-2`}>
+          <div className="flex gap-2">
+            <div className="h-4 w-12 bg-gray-200 rounded" />
+            <div className="h-4 w-24 bg-gray-200 rounded" />
+          </div>
           <div className="h-4 w-16 bg-gray-200 rounded" />
-          <div className="h-6 w-3/4 bg-gray-200 rounded" />
-          <div className="h-4 w-20 bg-gray-200 rounded" />
         </div>
       </div>
     </div>
