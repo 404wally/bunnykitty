@@ -258,10 +258,20 @@ html body [role="button"]:hover {
 }
 
 /* ============================================
-   CUSTOM CURSORS - MUST BE AT END OF FILE
+   CUSTOM CURSORS - Using Tailwind layer
    ============================================ */
+@layer utilities {
+  .sparkle-cursor {
+    cursor: url('/sparkle_pointer.png') 12 12, pointer !important;
+  }
+}
 
-/* Sparkle pointer for ALL clickable elements (highest specificity) */
-:where(a, button, [role="button"], input[type="submit"], input[type="button"], select, label[for], [onclick]) {
+/* Fallback: Force sparkle pointer on clickable elements */
+a:not([class*="cursor-"]),
+button:not([class*="cursor-"]),
+[role="button"],
+input[type="submit"],
+input[type="button"],
+select {
   cursor: url('/sparkle_pointer.png') 12 12, pointer !important;
 }
