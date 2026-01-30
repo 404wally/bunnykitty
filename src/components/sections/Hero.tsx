@@ -2,10 +2,14 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRef, useState } from 'react';
 
 export function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+
   return (
     <section
+      ref={heroRef}
       className="relative min-h-screen flex items-center justify-center bg-pop-yellow overflow-hidden px-4 sm:px-8 pt-24 pb-8 sm:pt-32 sm:pb-16"
     >
       {/* Animated Background Pattern */}
@@ -22,10 +26,11 @@ export function Hero() {
       />
 
       {/* Floating TWURP Characters - hidden on mobile, visible on tablet+ */}
-      <FloatingCharacter position="top-[20%] left-[5%] sm:left-[10%]" delay={0} className="hidden sm:block" />
-      <FloatingCharacter position="top-[30%] right-[5%] sm:right-[10%]" delay={0.5} className="hidden sm:block" />
-      <FloatingCharacter position="bottom-[25%] left-[5%] sm:left-[15%]" delay={1} className="hidden md:block" />
-      <FloatingCharacter position="bottom-[30%] right-[5%] sm:right-[15%]" delay={1.5} className="hidden md:block" />
+      {/* Drag them anywhere within the hero section! */}
+      <FloatingCharacter position="top-[20%] left-[5%] sm:left-[10%]" delay={0} className="hidden sm:block" heroRef={heroRef} />
+      <FloatingCharacter position="top-[30%] right-[5%] sm:right-[10%]" delay={0.5} className="hidden sm:block" heroRef={heroRef} />
+      <FloatingCharacter position="bottom-[25%] left-[5%] sm:left-[15%]" delay={1} className="hidden md:block" heroRef={heroRef} />
+      <FloatingCharacter position="bottom-[30%] right-[5%] sm:right-[15%]" delay={1.5} className="hidden md:block" heroRef={heroRef} />
 
       {/* Hero Content */}
       <div className="relative z-10 text-center max-w-[900px]">
@@ -136,11 +141,23 @@ export function Hero() {
 }
 
 // Floating TWURP Character Component - sized to match Concept 1 (font-size: 4rem = ~64px)
-function FloatingCharacter({ position, delay, className = '' }: { position: string; delay: number; className?: string }) {
+function FloatingCharacter({
+  position,
+  delay,
+  className = '',
+  heroRef
+}: {
+  position: string;
+  delay: number;
+  className?: string;
+  heroRef: React.RefObject<HTMLElement | null>;
+}) {
+  const [isDragging, setIsDragging] = useState(false);
+
   return (
     <motion.div
-      className={`absolute ${position} w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 z-10 cursor-grab ${className}`}
-      animate={{
+      className={`absolute ${position} w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 z-20 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'} ${className}`}
+      animate={isDragging ? {} : {
         y: [0, -20, 0],
         rotate: [0, 10, 0],
       }}
@@ -150,17 +167,22 @@ function FloatingCharacter({ position, delay, className = '' }: { position: stri
         delay,
         ease: 'easeInOut',
       }}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.15 }}
+      whileDrag={{ scale: 1.2, zIndex: 50 }}
       drag
-      dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
+      dragConstraints={heroRef}
       dragElastic={0.1}
+      dragMomentum={false}
+      onDragStart={() => setIsDragging(true)}
+      onDragEnd={() => setIsDragging(false)}
     >
       <Image
         src="/images/twurp.png"
-        alt="TWURP Character"
+        alt="TWURP Character - Drag me!"
         fill
-        className="object-contain"
+        className="object-contain pointer-events-none"
         sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, 128px"
+        draggable={false}
       />
     </motion.div>
   );
