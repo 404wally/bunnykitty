@@ -11,7 +11,7 @@ interface TrailDot {
 export default function CursorTrail() {
   const dotsRef = useRef<TrailDot[]>([]);
   const mousePos = useRef({ x: 0, y: 0 });
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
     const numDots = 12;
