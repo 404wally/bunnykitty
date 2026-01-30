@@ -1,0 +1,404 @@
+/* ============================================
+   BUNNYKITTY SHOPIFY THEME CUSTOMIZATIONS
+   Pop Art Playground Style
+   ============================================ */
+
+/* ----------------------------------------
+   1. CSS VARIABLES (Brand Colors)
+   ---------------------------------------- */
+:root {
+  --pop-red: #FF3B3B;
+  --pop-yellow: #FFE135;
+  --pop-blue: #00D4FF;
+  --pop-pink: #FF6EB4;
+  --pop-green: #39FF14;
+  --pop-purple: #9D4EDD;
+  --pop-orange: #FF6B35;
+  --black: #1A1A1A;
+  --white: #FFFFFF;
+}
+
+/* ----------------------------------------
+   2. TYPOGRAPHY
+   ---------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+body,
+.shopify-section {
+  font-family: 'Nunito', sans-serif !important;
+  color: var(--black);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Archivo Black', sans-serif !important;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* ----------------------------------------
+   3. CUSTOM CURSORS
+   ---------------------------------------- */
+body {
+  cursor: url('star_cursor.png') 16 16, auto !important;
+}
+
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+.btn,
+.product-card,
+.card,
+select,
+label[for] {
+  cursor: url('sparkle_pointer.png') 12 12, pointer !important;
+}
+
+/* ----------------------------------------
+   4. BUTTONS - Pop Art Style
+   ---------------------------------------- */
+.btn,
+.button,
+button,
+input[type="submit"],
+input[type="button"],
+.shopify-payment-button__button,
+.product-form__submit {
+  background-color: var(--pop-red) !important;
+  color: var(--white) !important;
+  border: 3px solid var(--black) !important;
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 var(--black) !important;
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em;
+  padding: 12px 24px !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.btn:hover,
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+.shopify-payment-button__button:hover,
+.product-form__submit:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0 var(--black) !important;
+  background-color: var(--pop-red) !important;
+}
+
+.btn:active,
+.button:active,
+button:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 2px 2px 0 var(--black) !important;
+}
+
+/* Secondary Button */
+.btn--secondary,
+.button--secondary {
+  background-color: var(--white) !important;
+  color: var(--black) !important;
+}
+
+.btn--secondary:hover,
+.button--secondary:hover {
+  background-color: var(--pop-green) !important;
+}
+
+/* ----------------------------------------
+   5. PRODUCT CARDS
+   ---------------------------------------- */
+.product-card,
+.card,
+.grid-product {
+  border: 3px solid var(--black) !important;
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 var(--black);
+  background: var(--white);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover,
+.card:hover,
+.grid-product:hover {
+  transform: translateY(-8px);
+  box-shadow: 8px 12px 0 var(--black);
+}
+
+.product-card__title,
+.card__title,
+.grid-product__title {
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+}
+
+.product-card__price,
+.card__price,
+.grid-product__price {
+  color: var(--pop-red) !important;
+  font-weight: 700 !important;
+}
+
+/* ----------------------------------------
+   6. HEADER / NAVIGATION
+   ---------------------------------------- */
+.header,
+.site-header,
+header {
+  background-color: var(--pop-yellow) !important;
+  border-bottom: 3px solid var(--black) !important;
+}
+
+.header__heading-link,
+.site-header__logo {
+  font-family: 'Archivo Black', sans-serif !important;
+}
+
+.header__menu-item,
+.site-nav__link,
+nav a {
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  color: var(--black) !important;
+  transition: color 0.2s ease;
+}
+
+.header__menu-item:hover,
+.site-nav__link:hover,
+nav a:hover {
+  color: var(--pop-red) !important;
+}
+
+/* ----------------------------------------
+   7. PRODUCT PAGE
+   ---------------------------------------- */
+.product__title,
+.product-single__title {
+  font-family: 'Archivo Black', sans-serif !important;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.product__price,
+.product-single__price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--pop-red) !important;
+}
+
+/* Variant selectors */
+.product-form__input,
+.variant-input,
+select {
+  border: 2px solid var(--black) !important;
+  border-radius: 0 !important;
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 600;
+}
+
+/* Product images */
+.product__media,
+.product-single__media {
+  border: 3px solid var(--black);
+  box-shadow: 6px 6px 0 var(--black);
+}
+
+/* ----------------------------------------
+   8. CART PAGE
+   ---------------------------------------- */
+.cart-item,
+.cart__item {
+  border-bottom: 2px solid var(--black) !important;
+  padding: 20px 0;
+}
+
+.cart-item__title,
+.cart__item-title {
+  font-weight: 800 !important;
+  text-transform: uppercase;
+}
+
+.cart__subtotal,
+.cart-subtotal__price {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--pop-red);
+}
+
+/* ----------------------------------------
+   9. BADGES & TAGS
+   ---------------------------------------- */
+.badge,
+.tag,
+.product__badge,
+.card__badge {
+  background-color: var(--pop-pink) !important;
+  color: var(--black) !important;
+  border: 2px solid var(--black) !important;
+  border-radius: 0 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  padding: 4px 12px;
+}
+
+.badge--sale,
+.tag--sale {
+  background-color: var(--pop-green) !important;
+}
+
+.badge--soldout,
+.tag--soldout {
+  background-color: var(--black) !important;
+  color: var(--white) !important;
+}
+
+/* ----------------------------------------
+   10. FOOTER
+   ---------------------------------------- */
+.footer,
+.site-footer,
+footer {
+  background-color: var(--black) !important;
+  color: var(--white) !important;
+  border-top: 4px solid var(--pop-yellow);
+}
+
+.footer a,
+.site-footer a,
+footer a {
+  color: var(--pop-yellow) !important;
+}
+
+.footer a:hover,
+.site-footer a:hover,
+footer a:hover {
+  color: var(--pop-pink) !important;
+}
+
+/* ----------------------------------------
+   11. FORMS & INPUTS
+   ---------------------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+textarea,
+select {
+  border: 2px solid var(--black) !important;
+  border-radius: 0 !important;
+  font-family: 'Nunito', sans-serif !important;
+  padding: 12px 16px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important;
+  border-color: var(--pop-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.3);
+}
+
+/* ----------------------------------------
+   12. ANNOUNCEMENT BAR
+   ---------------------------------------- */
+.announcement-bar,
+.shopify-section--announcement-bar {
+  background-color: var(--pop-red) !important;
+  color: var(--white) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--black);
+}
+
+/* ----------------------------------------
+   13. COLLECTION PAGE
+   ---------------------------------------- */
+.collection-hero__title,
+.collection__title {
+  font-family: 'Archivo Black', sans-serif !important;
+  text-transform: uppercase;
+}
+
+.collection-filters,
+.facets {
+  border: 2px solid var(--black);
+  padding: 16px;
+  background: var(--white);
+}
+
+/* ----------------------------------------
+   14. SELECTION / HIGHLIGHTS
+   ---------------------------------------- */
+::selection {
+  background: var(--pop-pink);
+  color: var(--black);
+}
+
+/* ----------------------------------------
+   15. CUSTOM SCROLLBAR
+   ---------------------------------------- */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pop-yellow);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--black);
+  border: 2px solid var(--pop-yellow);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pop-red);
+}
+
+/* ----------------------------------------
+   16. ANIMATIONS
+   ---------------------------------------- */
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-bounce {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* ----------------------------------------
+   17. UTILITY CLASSES
+   ---------------------------------------- */
+.pop-shadow {
+  box-shadow: 4px 4px 0 var(--black);
+}
+
+.pop-shadow-lg {
+  box-shadow: 8px 8px 0 var(--black);
+}
+
+.pop-border {
+  border: 3px solid var(--black);
+}
+
+.bg-pop-yellow { background-color: var(--pop-yellow) !important; }
+.bg-pop-red { background-color: var(--pop-red) !important; }
+.bg-pop-pink { background-color: var(--pop-pink) !important; }
+.bg-pop-blue { background-color: var(--pop-blue) !important; }
+.bg-pop-green { background-color: var(--pop-green) !important; }
+.bg-pop-purple { background-color: var(--pop-purple) !important; }
+
+.text-pop-red { color: var(--pop-red) !important; }
+.text-pop-yellow { color: var(--pop-yellow) !important; }
+.text-pop-pink { color: var(--pop-pink) !important; }
+.text-pop-blue { color: var(--pop-blue) !important; }
+.text-pop-green { color: var(--pop-green) !important; }
