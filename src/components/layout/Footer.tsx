@@ -25,7 +25,7 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { href: 'https://instagram.com/bunnykitty', label: 'Instagram', icon: InstagramIcon },
+  { href: 'https://instagram.com/bunnykittyofficial', label: 'Instagram', icon: InstagramIcon },
   { href: 'https://twitter.com/bunnykitty', label: 'Twitter', icon: TwitterIcon },
   { href: 'https://tiktok.com/@bunnykitty', label: 'TikTok', icon: TikTokIcon },
 ];
