@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import CursorTrail from '@/components/effects/CursorTrail';
 
 export const metadata: Metadata = {
   title: 'BunnyKitty | Character-Driven Art & Apparel',
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-body antialiased">
+        <CursorTrail />
         <Header />
         <main>{children}</main>
         <Footer />

@@ -54,6 +54,19 @@ body {
   cursor: url('/star_cursor.png') 16 16, auto;
 }
 
+/* Custom pointer cursor for clickable elements */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+.cursor-pointer,
+[onclick],
+select,
+label[for] {
+  cursor: url('/sparkle_pointer.png') 12 12, pointer !important;
+}
+
 /* Border-3 utility */
 .border-3 {
   border-width: 3px;
